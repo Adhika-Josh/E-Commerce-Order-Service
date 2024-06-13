@@ -210,7 +210,8 @@ func (o OrderImpl) DeleteOrder(ctx context.Context, orderID string) (model.Delet
 	}
 	return res,model.Errors{}
 }
-func (o *OrderService) ChangeOrderStatus(ctx context.Context, orderID string, req model.ChangeOrderStatusRequest) (model.OrderResponse, model.Errors) {
+
+func (o OrderImpl) ChangeOrderStatus(ctx context.Context, orderID string, req model.ChangeOrderStatusRequest) (model.OrderResponse, model.Errors) {
 	var res model.OrderResponse
 	var order entity.OrderDetails
 	if err := o.DB.Where("order_pid = ?", orderID).First(&order).Error; err != nil {
