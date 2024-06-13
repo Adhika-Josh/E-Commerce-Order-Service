@@ -27,8 +27,8 @@ func main() {
 	{
 		order.POST("/create", order_controller.PlaceOrder)
 		order.PUT("/:order_id", order_controller.EditOrder)
-	    order.DELETE("/:order_id", order_controller.DeleteOrder)
-	    order.PUT("/:order_id/status", order_controller.ChangeOrderStatus)
+	        order.DELETE("/:order_id", order_controller.DeleteOrder)
+	        order.PUT("/:order_id/status", order_controller.ChangeOrderStatus)
 	}
 	r.Run("localhost:8081")
 
