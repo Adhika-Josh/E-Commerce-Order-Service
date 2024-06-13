@@ -182,7 +182,7 @@ func (u UserImpl) GetUserByID(c *gin.Context, id string) (model.GetUserDetailsRe
 	}
 
 	var customerDetails model.CustomerDetails
-	if err := json.Unmarshal([]byte(product.CustomerDetails), &customerDetails); err != nil {
+	if err := json.Unmarshal([]byte(customer.CustomerDetails), &customerDetails); err != nil {
 		return res, model.Errors{
 			Error: "Failed to parse customer details",
 			Type:  "internal_server_error",
