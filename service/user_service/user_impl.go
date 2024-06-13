@@ -164,3 +164,37 @@ func (u UserImpl) UpdateUser(c *gin.Context, req model.UpdateUserRequest) (model
 	res.UserPID = user.CustomerPID
 	return res, custErr
 }
+func (u UserImpl) GetUserByID(c *gin.Context, id string) (model.GetUserDetailsResponse, model.Errors){
+    var customer entity.CustomerDetails
+	var res model.GetUserDetailsResponse
+
+	if err := u.DB.Where("customer_pid = ?", id).First(&customer).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return res, model.Errors{
+				Error: "No record found for the given User_PID",
+				Type:  "record_not_found",
+			}
+		}
+		return res, model.Errors{
+			Error: err.Error(),
+			Type:  "internal_server_error",
+		}
+	}
+
+	var customerDetails model.CustomerDetails
+	if err := json.Unmarshal([]byte(product.CustomerDetails), &customerDetails); err != nil {
+		return res, model.Errors{
+			Error: "Failed to parse customer details",
+			Type:  "internal_server_error",
+		}
+	}
+
+	res = model.GetUserDetailsResponse{
+		CustomerPID:     product.CustomerPID,
+		CustomerDetails: customerDetails,
+		UserName:        product.UserName,
+		Password:        product.Password,
+	}
+	return res, model.Errors{}
+
+}

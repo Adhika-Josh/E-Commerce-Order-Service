@@ -11,4 +11,5 @@ type UserInterface interface {
 	LoginUser(c *gin.Context, req model.LoginUserRequest) (model.LoginUserResponse, model.Errors)
 	DeleteUser(c *gin.Context, req model.DeleteUserRequest) (model.DeleteUserResponse, model.Errors)
 	UpdateUser(c *gin.Context, req model.UpdateUserRequest) (model.UpdateUserResponse, model.Errors)
+	GetUserByID(c *gin.Context, id string) (model.GetCustomerDetailsResponse, model.Errors)
 }

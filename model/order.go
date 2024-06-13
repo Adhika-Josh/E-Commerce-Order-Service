@@ -17,3 +17,28 @@ type OrderResponse struct {
 	OrderID string  `json:"order_id,omitempty"`
 	Total   float64 `json:"total,omitempty"`
 }
+
+type OrderDetails struct {
+	ItemPid      string  `json:"item_pid"`
+	ItemName     string  `json:"item_name"`
+	ItemQuantity int     `json:"item_quantity"`
+	ItemPrice    float64 `json:"item_price"`
+	ItemCategory string  `json:"item_category"`
+}
+
+type EditOrderRequest struct {
+	ItemDetails string `json:"item_details"`
+}
+
+type ChangeOrderStatusRequest struct {
+	OrderStatus string `json:"order_status"`
+}
+
+type OrderResponse struct {
+	OrderID string `json:"order_id"`
+	Message string `json:"message"`
+}
+type DeleteOrderResponse struct{
+	Status  int     `json:"status"`
+	Message string  `json:"message"`
+}

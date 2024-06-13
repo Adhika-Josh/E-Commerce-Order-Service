@@ -67,3 +67,51 @@ func UpdateUser(c *gin.Context) {
 	}
 	validator.ReturnJsonStruct(c, apiRes)
 }
+func GetUserByID(c *gin.Context){
+	id:=c.Param("id")
+	apiRes, err := u.GetUserByID(c, req)
+	if err.Error != "" {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, err)
+		return
+	}
+	validator.ReturnJsonStruct(c, apiRes)
+}
+
+func EditOrder(c *gin.Context) {
+	req, custErr := validator.ValidateEditOrder(c)
+	if custErr.Error != "" {
+		c.JSON(http.StatusInternalServerError, custErr)
+		return
+	}
+	orderID := c.Param("order_id")
+	apiRes, err := o.OrderService.EditOrder(c, orderID, req)
+	if err.Error != "" {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	validator.ReturnJsonStruct(c, apiRes)
+}
+func DeleteOrder(c *gin.Context) {
+	orderID := c.Param("order_id")
+	apiRes,err := o.OrderService.DeleteOrder(c, orderID)
+	if err.Error != "" {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	validator.ReturnJsonStruct(c, apiRes)
+}
+func ChangeOrderStatus(c *gin.Context) {
+	req, custErr := validator.ValidateChangeOrderStatus(c)
+	if custErr.Error != "" {
+		c.JSON(http.StatusInternalServerError, custErr)
+		return
+	}
+
+	orderID := c.Param("order_id")
+	apiRes, err := o.OrderService.ChangeOrderStatus(c, orderID, req)
+	if err.Error != "" {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	validator.ReturnJsonStruct(c, apiRes)
+}

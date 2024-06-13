@@ -74,3 +74,19 @@ type UpdateAddress struct {
 	Country      string `json:"country"`
 	Pincode      string `json:"pincode"`
 }
+
+type CustomerDetails struct {
+	Name     string  `json:"name"`
+	DOB      string  `json:"dob"`
+	Age      string  `json:"age"`
+	PhoneNo  string  `json:"phone_no"`
+	Address  Address `json:"address"`
+	Email    string  `json:"email"`
+}
+
+type GetUserDetailsResponse struct {
+	CustomerPID     string          `json:"customer_pid"`
+	CustomerDetails CustomerDetails `json:"customer_details"`
+	UserName        string          `json:"user_name"`
+	Password        string          `json:"password"`
+}
